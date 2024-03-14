@@ -1,12 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({name: 'pelicula'})
-//BD A GENERAR?
+@Entity({ name: 'informacion_general' }) // Reemplaza 'nombre_tabla_existente' con el nombre de tu tabla existente
 export class PeliculaEntity {
-    
-    @PrimaryGeneratedColumn()
-    id:number;
-    nombre:string;
-    descripcion:string;
-    genero:string;
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  nombre: string;
+
+  @Column()
+  descripcion: string;
+
+  @Column()
+  genero: string;
 }

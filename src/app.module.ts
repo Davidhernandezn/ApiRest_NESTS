@@ -24,6 +24,7 @@ import { PeliculaModule } from './pelicula/pelicula.module';
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],//FORMA EN QUE SE LLAMARAN LAS ENTIDADES
         synchronize: true,
+        logging:true,
       }),
       inject: [ConfigService],
     }),
