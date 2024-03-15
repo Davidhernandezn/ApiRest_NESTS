@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { PeliculaService } from './pelicula.service';
 import { PeliculaDto } from './dto/pelicula.dto';
 
@@ -11,12 +11,7 @@ export class PeliculaController {
         return await this.peliculaService.getAll();
     }
 
-   /* @Get(':id')
-    async getOne(@Param('id', ParseIntPipe) id: number) {
-        return await this.productoService.findById(id);
-    }*/
-
-    //@UsePipes(new ValidationPipe({whitelist: true}))
+    @UsePipes(new ValidationPipe({whitelist: true})) //IGNORAR CAMPOS QUE NO PERTENEZCAN EL DTO
     @Post()
     async create(@Body() dto: PeliculaDto) {
         return await this.peliculaService.create(dto);

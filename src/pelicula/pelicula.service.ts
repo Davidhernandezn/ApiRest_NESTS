@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PeliculaEntity } from './pelicula.entity';
 import { PeliculaRepository } from './pelicula.repository';
 import { PeliculaDto } from './dto/pelicula.dto';
+import { MessageDto } from 'src/common/message.dto';
 
 @Injectable()
 export class PeliculaService {
@@ -31,20 +32,13 @@ export class PeliculaService {
 
 
     async create(dto: PeliculaDto): Promise<any> {
-//        const exists = await this.findByNombre(dto.nombre);
- //       if (exists) throw new BadRequestException(new MessageDto('ese nombre ya existe'));
-        const pelicula = this.peliculaRepository.create(dto);
+    const pelicula = this.peliculaRepository.create(dto);
         await this.peliculaRepository.save(pelicula);
-       //return new MessageDto(`pelicula ${pelicula.nombre} creada`);
-       return {message: 'pelicula creada'}
+       return new MessageDto(`pelicula ${pelicula.nombre} creada`);
     }
 
     async update(id: number, dto: PeliculaDto): Promise<any> {
         const pelicula = await this.findById(id);
-        //if (!producto)
-          //  throw new NotFoundException(new MessageDto('no existe'));
-        //const exists = await this.findByNombre(dto.nombre);
-        //if (exists && exists.id !== id) throw new BadRequestException(new MessageDto('ese producto ya existe'));
         dto.nombre ? pelicula.nombre = dto.nombre : pelicula.nombre = pelicula.nombre;
         dto.descripcion ? pelicula.descripcion = dto.descripcion : pelicula.descripcion = pelicula.descripcion;
         dto.genero ? pelicula.genero = dto.genero : pelicula.genero = pelicula.genero;
